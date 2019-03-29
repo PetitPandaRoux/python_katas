@@ -1,9 +1,9 @@
 import transform_word as tw
 
 
-# def test_trajet():
-#     resultat = ['abcde', 'abcd', 'abc', 'abz', 'ayz', 'xyz']
-#     assert tw.trajet('abcde', 'xyz') == resultat
+def test_trajet():
+    resultat = ['abcde', 'abcd', 'abc', 'abz', 'ayz', 'xyz']
+    assert tw.trajet('abcde', 'xyz') == resultat
 
 def test_reduit_de_1():
     assert tw.reduit('abcde') == 'abcd'
@@ -29,3 +29,16 @@ def test_augmente_de_1_bis():
 def test_augmente_jusque_cible():
     trajet_vers_cible = ['abcx','abcxy', 'abcxyz']
     assert tw.transforme_longueur('abc','abcxyz') == trajet_vers_cible
+
+
+def test_change_de_1():
+    assert tw.change('abc', 2, 'z') == 'abz'
+
+
+def test_change_jusque_cible():
+    trajet_vers_cible = ['abz', 'ayz', 'xyz']
+    assert tw.transforme_mot('abc', 'xyz') == trajet_vers_cible
+
+
+def test_donne_difference():
+    assert tw.donne_difference('abz', 'ayz') == (1, 'y')
