@@ -1,44 +1,61 @@
 import transform_word as tw
 
 
-def test_trajet():
-    resultat = ['abcde', 'abcd', 'abc', 'abz', 'ayz', 'xyz']
-    assert tw.trajet('abcde', 'xyz') == resultat
-
-def test_reduit_de_1():
-    assert tw.reduit('abcde') == 'abcd'
+def test_differing_index_three_letters():
+    assert tw.find_first_differing_letter_index('cat', 'cut') == 1
 
 
-def test_reduit_de_1_bis():
-    assert tw.reduit('abcd') == 'abc'
+def test_differing_index_four_letters():
+    assert tw.find_first_differing_letter_index('abcd', 'bbcd') == 0
 
 
-def test_reduit_jusque_cible():
-    trajet_vers_cible = ['abcd', 'abc']
-    assert tw.transforme_longueur('abcde', 'abc') == trajet_vers_cible
+def test_differing_index_multiple_occurences():
+    assert tw.find_first_differing_letter_index('abbcd', 'abccd') == 2
 
 
-def test_augmente_de_1():
-    assert tw.augmente('abc','d') == 'abcd'
+def test_is_not_subsitution():
+    assert tw.is_substitution('abc', 'bac') == False
 
 
-def test_augmente_de_1_bis():
-    assert tw.augmente('abc','z') == 'abcz'
+def test_is_substitution():
+    assert tw.is_substitution('crave', 'crate') == True
 
 
-def test_augmente_jusque_cible():
-    trajet_vers_cible = ['abcx','abcxy', 'abcxyz']
-    assert tw.transforme_longueur('abc','abcxyz') == trajet_vers_cible
+def test_is_substitution_2():
+    assert tw.is_substitution('abc', 'bbc') == True
 
 
-def test_change_de_1():
-    assert tw.change('abc', 2, 'z') == 'abz'
+def test_is_substitution_3():
+    assert tw.is_substitution('abc', 'abd') == True
 
 
-def test_change_jusque_cible():
-    trajet_vers_cible = ['abz', 'ayz', 'xyz']
-    assert tw.transforme_mot('abc', 'xyz') == trajet_vers_cible
+def test_is_not_addition():
+    assert tw.is_addition('abcd', 'abbbbb') == False
 
 
-def test_donne_difference():
-    assert tw.donne_difference('abz', 'ayz') == (1, 'y')
+def test_is_addition():
+    assert tw.is_addition('abcd', 'abzcd') == True
+
+
+def test_is_addition_2():
+    assert tw.is_addition('abcd', 'aabcd') == True
+
+
+def test_is_addition_3():
+    assert tw.is_addition('abc', 'abcd') == True
+
+
+def test_is_not_substraction():
+    assert tw.is_substraction('abcd', 'abb') == False
+
+
+def test_is_substraction():
+    assert tw.is_substraction('abcd', 'abd') == True
+
+
+def test_is_substraction_2():
+    assert tw.is_substraction('abcd', 'bcd') == True
+
+
+def test_is_substraction_3():
+    assert tw.is_substraction('abcd', 'abc') == True
